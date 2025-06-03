@@ -1,0 +1,97 @@
+###Get the service document - shows all the available entities
+http://localhost:4004/odata/v4/CatalogService
+
+###Get service metadata document
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Get All employees data - SELECT * FROM dbtab
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+
+###Get selected properties - SELECT c1, c2, c3 FROM dbtab
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=ID,nameFirst,sex,salaryAmount
+
+###Pagination
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=2&$skip=2
+
+###Pagination
+http://localhost:4004/odata/v2/CatalogService/EmployeeSet?$top=2&$skip=2
+
+###Filtering
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=bankName eq 'My Bank of San Francisco'
+
+###Filtering by pattern search
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst,'ann')
+
+###Counting the no of employees
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+###POST data - copy the generated ID for next operations
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+    "nameFirst": "Chistiano",
+    "nameMiddle": null,
+    "nameLast": "Ronaldo",
+    "nameInitials": null,
+    "sex": "M",
+    "language": "E",
+    "phoneNumber": null,
+    "email": "chistiano.ronado@ey.co.in",
+    "loginName": "RONALDOCH",
+    "Currency_code": "EUR",
+    "salaryAmount": 70000,
+    "accountNumber": "345678901",
+    "bankId": "99999888",
+    "bankName": "HDFC Bank"
+}
+
+
+###Read Single employee data by id - copy the id from last operation
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/50d0351d-95ba-4d08-ad2c-dcf46797e5c4
+
+###PATCH = to update data in db
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/50d0351d-95ba-4d08-ad2c-dcf46797e5c4
+Content-Type: application/json
+
+{
+    "salaryAmount": 100000
+}
+
+###DELETE - to remove data
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/50d0351d-95ba-4d08-ad2c-dcf46797e5c4
+
+###Get All POS
+GET http://localhost:4004/odata/v4/CatalogService/POs
+
+###Get Single PO
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052
+
+###Get the items related to POs
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052/Items
+
+###Get Header and PO items together
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052?$expand=Items
+
+###Get products
+http://localhost:4004/odata/v4/CatalogService/ProductSet
+
+###Get where the product is used
+http://localhost:4004/odata/v4/CatalogService/ProductSet/74867AD200E41EDBA5D8B06B26EB4052/To_Items
+
+###Get product and its usage in orders together
+http://localhost:4004/odata/v4/CatalogService/ProductSet/74867AD200E41EDBA5D8B06B26EB4052?$expand=To_Items
+
+
+###Get Single PO
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC2A052/boost
+Content-Type: application/json
+
+{}
+
+###Get the largest order
+http://localhost:4004/odata/v4/CatalogService/getLargestOrder
+
+
+###Get Address
+http://localhost:4004/odata/v4/CatalogService/AddressSet
